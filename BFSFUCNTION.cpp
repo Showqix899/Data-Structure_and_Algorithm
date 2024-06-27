@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
-vector <int> Bfs(int n,vector<int> adj[]){
-    int vis[n]={0};
-    vis[0]=1;
-    queue <int> q;
-    q.push(0);
+vector<int> bfsOfGraph(vector<int> adj[],int n,int k){
+    vector<int> vis(n,0);
+    vis[k]=1;
+    queue<int> q;
+    q.push(k);
     vector<int> bfs;
     while(!q.empty()){
         int node = q.front();
@@ -16,29 +16,31 @@ vector <int> Bfs(int n,vector<int> adj[]){
                 q.push(it);
             }
         }
+        
     }
     return bfs;
     
 
 }
-void addEdge(vector <int> adj[],int u,int v){
+void addEdge(vector<int> adj[],int u,int v){
     adj[u].push_back(v);
     adj[v].push_back(u);
 }
-void Ans(vector <int> &ans){
-    for( int i=0;i<ans.size();i++){
-        cout<<ans[i]<<" ";
+void printEdge(vector<int> &ans){
+    for(auto it: ans){
+        cout<<it<<" ";
     }
 }
 int main(){
-    vector <int> adj[6];
-    addEdge(adj,0,1);
-    addEdge(adj,0,2);
+    int n=7;
+    vector<int> adj[n];
+    addEdge(adj,1,2);
     addEdge(adj,1,3);
     addEdge(adj,2,4);
-    addEdge(adj,3,5);
     addEdge(adj,4,5);
-    vector<int> ans=Bfs(6,adj);
-    Ans(ans);
+    addEdge(adj,4,6);
+    vector<int> ANS= bfsOfGraph(adj,n-1,1);
+    printEdge(ANS);
+    
 
 }
